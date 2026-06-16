@@ -105,6 +105,54 @@ body {
 /* Lists */
 .ranked { line-height: 1.7; }
 .ranked > li { margin-bottom: 10px; font-size: 1.05rem; }
+
+/* My Playing Days story block */
+.story {
+  background-color: #fff7ec;
+  border-radius: 10px;
+  padding: 18px 24px;
+  line-height: 1.7;
+  border-left: 5px solid #1d242e;
+}
+.pullquote {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #c1440e;            /* font color */
+  border-top: 1px dashed #e0c39c;
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+/* Favorite player cards */
+.player-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #ff8c42;
+}
+.player-card h3 {
+  font-family: 'Georgia', serif;   /* font family */
+  margin: 4px 0 8px;
+  font-size: 1.5rem;
+  color: #1d242e;                  /* font color */
+}
+.player-card p { line-height: 1.7; margin: 0; }
+.player-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background-color: #c1440e;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.player-card.kobe { border-left-color: #552583; }   /* Lakers purple */
+.player-card.steph { border-left-color: #1d428a; }  /* Warriors blue */
+.player-card.lebron { border-left-color: #c8102e; } /* wine red */
 .legends {
   background-color: #fff3e3;
   border-left: 5px solid #ff8c42;
