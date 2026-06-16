@@ -186,8 +186,9 @@ body {
   border-radius: 10px;
   overflow: hidden;
   background-color: #1d242e;   /* dark to match the viz so no white gap shows */
-  max-width: 1340px;
+  max-width: 1290px;
   margin: 0 auto;
+  text-align: center;
 }
 
 /* Call-to-action block */
