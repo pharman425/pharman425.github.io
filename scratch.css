@@ -68,10 +68,11 @@ body {
 /* 4. Main content wrapper — positioned/styled block (DIV) */
 .wrap {
   position: relative;
-  max-width: 1180px;
+  width: 90%;
+  max-width: 1500px;
   margin: 30px auto;
   background-color: rgba(255, 251, 245, 0.95);
-  padding: 30px 56px;
+  padding: 35px 60px;
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   border-top: 6px solid #ff8c42;
