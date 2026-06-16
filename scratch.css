@@ -68,10 +68,10 @@ body {
 /* 4. Main content wrapper — positioned/styled block (DIV) */
 .wrap {
   position: relative;
-  max-width: 820px;
+  max-width: 1180px;
   margin: 30px auto;
   background-color: rgba(255, 251, 245, 0.95);
-  padding: 30px 40px;
+  padding: 30px 56px;
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   border-top: 6px solid #ff8c42;
@@ -141,14 +141,16 @@ body {
 .player-card p { line-height: 1.7; margin: 0; }
 .player-tag {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: #ffffff;
   background-color: #c1440e;
-  padding: 3px 10px;
+  padding: 5px 16px;
   border-radius: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 .player-card.kobe { border-left-color: #552583; }   /* Lakers purple */
 .player-card.steph { border-left-color: #1d428a; }  /* Warriors blue */
