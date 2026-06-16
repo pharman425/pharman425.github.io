@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buzzer Beater — Preston Harman</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #2a3647 0%, #141a24 70%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px;
+    }
+
+    header { text-align: center; margin-bottom: 10px; }
+    header h1 { font-family: Georgia, serif; color: #ff8c42; font-size: 2.1rem; }
+    header p { color: #b9c3d0; font-size: .95rem; margin-top: 4px; }
+
+    .scoreboard {
+      display: flex;
+      gap: 14px;
+      margin: 12px 0;
+    }
+    .stat {
+      background: #1d242e;
+      border: 2px solid #303b4a;
+      border-radius: 10px;
+      padding: 8px 18px;
+      text-align: center;
+      min-width: 86px;
+    }
+    .stat .label { font-size: .7rem; letter-spacing: 1px; color: #8b97a6; text-transform: uppercase; }
+    .stat .value { font-size: 1.5rem; font-weight: bold; color: #ff8c42; }
+
+    /* Court */
+    .court {
+      position: relative;
+      width: 360px;
+      max-width: 92vw;
+      height: 460px;
+      background: linear-gradient(#3a2a18, #5a3f24);
+      border: 4px solid #1d242e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+    .court::after { /* free-throw line */
+      content: "";
+      position: absolute;
+      bottom: 70px; left: 50%;
+      transform: translateX(-50%);
+      width: 140px; height: 0;
+      border-top: 3px dashed rgba(255, 255, 255, .35);
+    }
+
+    /* Backboard + hoop */
+    .hoop {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left .25s ease;
+    }
+    .backboard {
+      width: 90px; height: 56px;
+      background: rgba(255, 255, 255, .9);
+      border: 3px solid #1d242e;
+      border-radius: 4px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .square {
+      position: absolute;
+      width: 34px; height: 24px;
+      border: 3px solid #c1440e;
+      left: 50%; bottom: 6px;
+      transform: translateX(-50%);
+    }
+    .rim {
+      width: 56px; height: 12px;
+      border: 4px solid #ff8c42;
+      border-top: none;
+      border-radius: 0 0 30px 30px;
+      margin: -2px auto 0;
+    }
+
+    /* Ball */
+    .ball {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #ffb066, #e8743b 60%, #b8501f);
+      box-shadow: inset -3px -3px 6px rgba(0, 0, 0, .35);
+    }
+    .ball::before, .ball::after {
+      content: "";
+      position: absolute;
+      background: rgba(40, 20, 10, .55);
+    }
+    .ball::before { width: 2px; height: 100%; left: 50%; }
+    .ball::after { width: 100%; height: 2px; top: 50%; }
+
+    /* Power meter */
+    .meter-wrap {
+      width: 360px; max-width: 92vw;
+      margin: 16px 0 6px;
+    }
+    .meter {
+      height: 22px;
+      background: #1d242e;
+      border: 2px solid #303b4a;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4caf50, #ffd54f 55%, #ff5252);
+    }
+    .sweet {
+      position: absolute;
+      top: 0; height: 100%;
+      background: rgba(255, 255, 255, .25);
+      border-left: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+    .meter-hint { text-align: center; font-size: .8rem; color: #8b97a6; margin-top: 6px; }
+
+    .shoot-btn {
+      margin-top: 12px;
+      background: #ff8c42;
+      color: #1d242e;
+      border: none;
+      font-weight: bold;
+      font-size: 1.15rem;
+      padding: 14px 46px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform .12s ease;
+    }
+    .shoot-btn:hover { transform: scale(1.05); }
+    .shoot-btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+    .msg { height: 26px; margin-top: 10px; font-weight: bold; font-size: 1.1rem; }
+    .msg.score { color: #6dd47e; }
+    .msg.miss { color: #ff7b7b; }
+
+    .links { margin-top: 18px; text-align: center; }
+    .links a {
+      color: #ff8c42;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 26, 36, .92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 5;
+    }
+    .overlay h2 { color: #ff8c42; font-size: 1.8rem; margin-bottom: 8px; }
+    .overlay p { color: #cbd3dd; margin-bottom: 16px; }
+    .hidden { display: none; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🏀 Buzzer Beater</h1>
+    <p>Stop the power meter in the white zone to sink the shot. You've got 30 seconds!</p>
+  </header>
+
+  <div class="scoreboard">
+    <div class="stat"><div class="label">Score</div><div class="value" id="score">0</div></div>
+    <div class="stat"><div class="label">Streak</div><div class="value" id="streak">0</div></div>
+    <div class="stat"><div class="label">Time</div><div class="value" id="time">30</div></div>
+  </div>
+
+  <div class="court" id="court">
+    <div class="hoop" id="hoop">
+      <div class="backboard"><div class="square"></div></div>
+      <div class="rim"></div>
+    </div>
+    <div class="ball" id="ball"></div>
+
+    <!-- Start / Game-over overlay -->
+    <div class="overlay" id="overlay">
+      <h2 id="ovTitle">Ready?</h2>
+      <p id="ovText">Time your shot and rack up points before the buzzer.</p>
+      <button class="shoot-btn" id="startBtn">Start Game</button>
+    </div>
+  </div>
+
+  <div class="meter-wrap">
+    <div class="meter">
+      <div class="meter-fill" id="meterFill"></div>
+      <div class="sweet" id="sweet"></div>
+    </div>
+    <div class="meter-hint">Aim for the highlighted zone — it shrinks as your streak grows.</div>
+  </div>
+
+  <button class="shoot-btn" id="shootBtn" disabled>Shoot</button>
+  <div class="msg" id="msg"></div>
+
+  <div class="links">
+    <a href="scratch.html">&laquo; Back to my Basketball page</a>
+    <a href="index.html">My Professional Site</a>
+  </div>
+
+  <script>
+    const ball = document.getElementById('ball');
+    const hoop = document.getElementById('hoop');
+    const meterFill = document.getElementById('meterFill');
+    const sweet = document.getElementById('sweet');
+    const shootBtn = document.getElementById('shootBtn');
+    const startBtn = document.getElementById('startBtn');
+    const overlay = document.getElementById('overlay');
+    const msg = document.getElementById('msg');
+    const scoreEl = document.getElementById('score');
+    const streakEl = document.getElementById('streak');
+    const timeEl = document.getElementById('time');
+    const ovTitle = document.getElementById('ovTitle');
+    const ovText = document.getElementById('ovText');
+
+    let score = 0, streak = 0, timeLeft = 30;
+    let power = 0, dir = 1, meterRAF, gameTimer, running = false, animating = false;
+
+    // Sweet-spot zone (center + width). Width shrinks with streak.
+    function zone() {
+      const width = Math.max(14, 30 - streak * 2);   // %
+      const center = 60;                              // % (good shots are a bit high)
+      return { start: center - width / 2, width };
+    }
+    function drawZone() {
+      const z = zone();
+      sweet.style.left = z.start + '%';
+      sweet.style.width = z.width + '%';
+    }
+
+    function runMeter() {
+      power += dir * 2.2;
+      if (power >= 100) { power = 100; dir = -1; }
+      if (power <= 0) { power = 0; dir = 1; }
+      meterFill.style.width = power + '%';
+      meterRAF = requestAnimationFrame(runMeter);
+    }
+
+    function startGame() {
+      score = 0; streak = 0; timeLeft = 30;
+      scoreEl.textContent = 0; streakEl.textContent = 0; timeEl.textContent = 30;
+      overlay.classList.add('hidden');
+      running = true;
+      shootBtn.disabled = false;
+      msg.textContent = '';
+      drawZone();
+      runMeter();
+      gameTimer = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    function endGame() {
+      running = false;
+      clearInterval(gameTimer);
+      cancelAnimationFrame(meterRAF);
+      shootBtn.disabled = true;
+      ovTitle.textContent = 'Final Score: ' + score;
+      ovText.textContent = score >= 60 ? 'Sharpshooter! 🔥'
+        : score >= 30 ? 'Solid game — run it back?' : 'Keep practicing — try again!';
+      startBtn.textContent = 'Play Again';
+      overlay.classList.remove('hidden');
+    }
+
+    function shoot() {
+      if (!running || animating) return;
+      animating = true;
+      shootBtn.disabled = true;
+      const z = zone();
+      const made = power >= z.start && power <= z.start + z.width;
+
+      // animate the ball arc up to the rim
+      const hoopLeft = hoop.style.left || '50%';
+      ball.style.transition = 'bottom .45s ease-out, left .45s ease-out, transform .45s ease-out';
+      ball.style.bottom = '330px';
+      ball.style.left = hoopLeft && hoopLeft !== '50%' ? hoopLeft : '50%';
+      ball.style.transform = 'translateX(-50%) scale(.75)';
+
+      setTimeout(() => {
+        if (made) {
+          score += 2 + Math.min(streak, 5);   // streak bonus
+          streak++;
+          msg.textContent = streak > 1 ? '🔥 SWISH! +' + (2 + Math.min(streak - 1, 5)) + ' (streak ' + streak + ')' : '🏀 SWISH! +2';
+          msg.className = 'msg score';
+          // fall through the net
+          ball.style.transition = 'bottom .3s ease-in';
+          ball.style.bottom = '300px';
+        } else {
+          streak = 0;
+          msg.textContent = power < z.start ? 'Short! ❌' : 'Too strong! ❌';
+          msg.className = 'msg miss';
+          // bounce off
+          ball.style.transition = 'bottom .35s ease-in, left .35s ease-in';
+          ball.style.bottom = '120px';
+          ball.style.left = (Math.random() > .5 ? '30%' : '70%');
+        }
+        scoreEl.textContent = score;
+        streakEl.textContent = streak;
+        drawZone();
+        if (made) moveHoop();
+
+        // reset ball
+        setTimeout(() => {
+          ball.style.transition = 'none';
+          ball.style.bottom = '16px';
+          ball.style.left = '50%';
+          ball.style.transform = 'translateX(-50%) scale(1)';
+          animating = false;
+          if (running) shootBtn.disabled = false;
+        }, 450);
+      }, 450);
+    }
+
+    // After a make, move the hoop to add difficulty
+    function moveHoop() {
+      const positions = ['30%', '50%', '70%'];
+      hoop.style.left = positions[Math.floor(Math.random() * positions.length)];
+    }
+
+    shootBtn.addEventListener('click', shoot);
+    startBtn.addEventListener('click', startGame);
+    // Spacebar to shoot
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') { e.preventDefault(); if (running) shoot(); }
+    });
+  </script>
+</body>
+
+</html>

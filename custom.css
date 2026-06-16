@@ -1,0 +1,171 @@
+/* ============================================================
+   custom.css  —  Custom styles that override the Bootstrap theme
+   (Do not edit Bootstrap directly; these rules layer on top.)
+   ============================================================ */
+
+:root {
+  --ink: #0f1b2d;       /* deep navy */
+  --ink-2: #16263d;
+  --accent: #e8743b;    /* warm basketball orange */
+  --accent-dark: #c95d28;
+  --paper: #f7f7f5;
+  --muted: #6b7785;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1, h2, h3, .navbar-brand, .display-3, .display-5 {
+  font-family: 'Sora', 'Inter', sans-serif;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background: var(--ink);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .18);
+}
+.navbar-brand { letter-spacing: .3px; }
+.navbar-dark .navbar-nav .nav-link { color: #cfd8e3; font-weight: 500; }
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active { color: var(--accent); }
+
+/* ---- Hero ---- */
+.hero {
+  min-height: 88vh;
+  padding-top: 70px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(232, 116, 59, .35), transparent 45%),
+    linear-gradient(135deg, #0f1b2d 0%, #16263d 55%, #243a57 100%);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: .6rem;
+}
+.hero-sub { max-width: 640px; color: #d7dee7; }
+
+/* ---- Buttons ---- */
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-accent:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+
+/* ---- Page heading band ---- */
+.page-head {
+  background: var(--ink);
+  color: #fff;
+  padding: 130px 0 50px;
+}
+
+/* ---- Feature cards ---- */
+.feature-card {
+  background: #fff;
+  border: 1px solid #e7e7e3;
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(15, 27, 45, .12);
+}
+.feature-icon {
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: .8rem;
+  display: block;
+}
+.feature-card h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+.feature-card p { color: var(--muted); margin-bottom: 0; }
+
+/* ---- Quote band ---- */
+.quote-band {
+  background: var(--accent);
+  color: #fff;
+  padding: 3rem 0;
+}
+.quote-band blockquote {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ---- Section titles ---- */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: .5rem;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 52px; height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ---- About stats ---- */
+.stat-stack { display: grid; gap: .8rem; }
+.stat-row {
+  display: flex; align-items: center; gap: 1rem;
+  background: #fff;
+  border: 1px solid #e7e7e3;
+  border-left: 5px solid var(--accent);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  font-weight: 500;
+}
+.stat-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 64px;
+}
+
+/* ---- Résumé ---- */
+.resume-wrap { max-width: 860px; margin: 0 auto; }
+.resume-section {
+  background: #fff;
+  border: 1px solid #e7e7e3;
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+  margin-bottom: 1.5rem;
+}
+.resume-item { padding: .9rem 0; border-top: 1px solid #f0f0ec; }
+.resume-item:first-of-type { border-top: none; }
+.resume-item-head {
+  display: flex; justify-content: space-between; flex-wrap: wrap; align-items: baseline;
+}
+.resume-item .role { font-weight: 700; font-size: 1.05rem; }
+.resume-item .date { color: var(--muted); font-size: .9rem; }
+.resume-item .org { color: var(--accent-dark); font-weight: 600; margin: .1rem 0 .4rem; }
+.resume-item ul { margin-bottom: 0; }
+.skill-head { font-weight: 700; margin: 1rem 0 .6rem; color: var(--ink-2); }
+.skill-pill {
+  display: inline-block;
+  background: #eef1f5;
+  color: var(--ink-2);
+  border-radius: 20px;
+  padding: .35rem .85rem;
+  margin: 0 .35rem .5rem 0;
+  font-size: .85rem;
+  font-weight: 500;
+}
+
+/* ---- Footer ---- */
+footer { background: var(--ink); color: #cfd8e3; }

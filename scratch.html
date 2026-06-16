@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooked on Hoops — Preston Harman</title>
+  <!-- My own from-scratch stylesheet (NOT Bootstrap) -->
+  <link rel="stylesheet" href="scratch.css">
+</head>
+
+<body id="top">
+
+  <!-- ===== Navigation bar (div #1 for positioning) ===== -->
+  <div class="topbar">
+    <span class="brand">🏀 Hooked on Hoops</span>
+    <span class="topbar-links">
+      <a href="#why">Why I Love It</a>
+      <a href="#legends">Legends</a>
+      <a href="#video">Watch</a>
+      <a href="#data">The Data</a>
+      <a href="webapp.html">Play My Game</a>
+      <!-- Navigation back to the professional (Bootstrap) pages -->
+      <a href="index.html" class="pro-link">My Professional Site &raquo;</a>
+    </span>
+  </div>
+
+  <!-- ===== Hero header (div #2 for positioning) ===== -->
+  <div class="hero-court">
+    <h1>The Beautiful Game of Basketball</h1>
+    <p class="tagline">Five players, one ball, endless possibility.</p>
+  </div>
+
+  <!-- ===== Main content wrapper (div #3 for positioning) ===== -->
+  <div class="wrap">
+
+    <!-- Anchor target: Why I love it -->
+    <h2 id="why">Why I'm Hooked</h2>
+    <p>
+      Basketball is the rare sport where one player can change everything and yet nobody wins alone.
+      I grew up playing, I've refereed it, and I'll watch just about any game I can find. Here's what
+      keeps me coming back — and a few of the players who define the game for me.
+    </p>
+
+    <!-- A non-Bootstrap image (hotlinked from Wikimedia Commons, which permits this) -->
+    <img class="court-img"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Wilson_Basketball.JPG"
+      alt="A Wilson basketball">
+    <p class="caption">My favorite sound in sports: the ball going through the net.</p>
+
+    <p>
+      There's nothing like the sound of a clean swish or the energy of a buzzer-beater. Below is how I'd
+      rank what makes the sport great, with my reasons nested underneath each one.
+    </p>
+
+    <!-- ===== Unordered list embedded inside an ordered list ===== -->
+    <h2>What Makes It Great (My Ranking)</h2>
+    <ol class="ranked">
+      <li><strong>The pace</strong>
+        <ul>
+          <li>Constant back-and-forth action</li>
+          <li>A single fast break can flip the momentum</li>
+        </ul>
+      </li>
+      <li><strong>The skill</strong>
+        <ul>
+          <li>Shooting, handles, footwork, IQ</li>
+          <li>Seven-footers who can shoot threes</li>
+        </ul>
+      </li>
+      <li><strong>The drama</strong>
+        <ul>
+          <li>Game-winners and overtime thrillers</li>
+          <li>Playoff series that build for two weeks</li>
+        </ul>
+      </li>
+    </ol>
+
+    <!-- Anchor target: Legends -->
+    <h2 id="legends">Players I'd Build Around</h2>
+    <p>A few of the names I'd take first in a pickup draft of all-time greats:</p>
+    <ul class="legends">
+      <li>Michael Jordan — the standard everyone is measured against</li>
+      <li>LeBron James — longevity and all-around dominance</li>
+      <li>Stephen Curry — changed how the game is played</li>
+      <li>Kobe Bryant — the blueprint for work ethic</li>
+    </ul>
+
+    <!-- Anchor target: Video -->
+    <h2 id="video">Watch: The Game in Motion</h2>
+    <p>A look at why this sport is so much fun to watch:</p>
+    <div class="video-box">
+      <iframe
+        src="https://www.youtube.com/embed/2Tg0z8sShjk"
+        title="Basketball video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Anchor target: Tableau -->
+    <h2 id="data">The Game by the Numbers</h2>
+    <p>Basketball is a data lover's dream. Here's a live, interactive Tableau dashboard — hover, click,
+      and filter it yourself:</p>
+
+    <!-- ===== Live, interactive embedded Tableau viz ===== -->
+    <div class="tableau-box">
+      <div class='tableauPlaceholder' id='vizContainer' style='position: relative; width:100%;'>
+        <noscript>
+          <a href='#'><img alt='Tableau dashboard'
+            src='https://public.tableau.com/static/images/Re/RegionalSampleWorkbook/Storyboard/1.png'
+            style='border:none'></a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='RegionalSampleWorkbook/Storyboard' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image'
+            value='https://public.tableau.com/static/images/Re/RegionalSampleWorkbook/Storyboard/1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+        </object>
+      </div>
+    </div>
+
+    <!-- Call to action to the web app -->
+    <div class="cta">
+      <h2 style="border:none; margin-top:0;">Think you've got game?</h2>
+      <p>Try the buzzer-beater shooting game I built with AI.</p>
+      <a class="cta-btn" href="webapp.html">🏀 Play Buzzer Beater</a>
+    </div>
+
+    <!-- On-page anchors back up -->
+    <p class="backlinks">
+      <a href="#top">↑ Back to top</a> &nbsp;|&nbsp;
+      <a href="#legends">Jump to Legends</a> &nbsp;|&nbsp;
+      <a href="index.html">Visit my professional site</a>
+    </p>
+  </div>
+
+  <!-- ===== Footer (div for positioning) ===== -->
+  <div class="footer">
+    <p>Made by Preston Harman &middot; IS 201 Web Project &middot; 2026</p>
+  </div>
+
+  <!-- Tableau Public embed script -->
+  <script type="text/javascript"
+    src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+
+</body>
+
+</html>
